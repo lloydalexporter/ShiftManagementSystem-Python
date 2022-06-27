@@ -1,13 +1,35 @@
 #!/usr/bin/python
 
+# 
+#
+#
 
+
+
+# ! - Libraries - ! #
 import tkinter as tk # Import tkinter module for GUI.
 
 
-window = tk.Tk() # 
 
-# Code to add widgets will go here...
-window.mainloop() # 
+# ! - Constants - ! #
+window = tk.Tk() # Initialise Window.
+window.title("Shift Payment Calculator") # Window title.
+
+
+
+
+# ! - Functions - ! #
+
+
+
+
+
+
+# ! - \/ \/ \/ \/ \/ - ! #
+# ! - - -  Main  - - - ! #
+if __name__ == "__main__":
+    
+    window.mainloop()
 
 
 
