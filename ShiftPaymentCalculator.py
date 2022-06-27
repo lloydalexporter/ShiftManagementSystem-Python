@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-import tkinter
+
+import tkinter as tk # Import tkinter module for GUI.
 
 
-top = tkinter.Tk()
+window = tk.Tk() # 
 
 # Code to add widgets will go here...
-top.mainloop()
+window.mainloop() # 
 
 
 
