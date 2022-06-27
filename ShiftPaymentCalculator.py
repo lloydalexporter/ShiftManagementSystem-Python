@@ -7,14 +7,25 @@
 
 
 # ! - Libraries - ! #
-import tkinter as tk # Import tkinter module for GUI.
+from tkinter import *
+from tkinter import messagebox
 
 
 
 # ! - Constants - ! #
-window = tk.Tk() # Initialise Window.
-window.title("Shift Payment Calculator") # Window title.
 
+
+
+
+# ! - Window Setup - ! #
+window = Tk() # Initialise Window.
+window.title("Shift Payment Calculator") # Window title.
+window.geometry("1175x720")
+window.resizable(False,False)
+# window.configure(background="Plum")
+
+
+# ! - 
 
 
 
