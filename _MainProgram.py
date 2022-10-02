@@ -2,6 +2,7 @@
 
 
 # ! - Libraries - ! #
+import os
 import datetime as dt
 from pprint import pprint as pp
 from MenuOptions import MenuOptions
@@ -133,6 +134,12 @@ class Main:
 				tableNames = self.dM.getTableNames() # Get the names of all the tables.
 				allTablesData = self.dM.getAllData(tableNames) # Get all of the data.
 				self.cM.exportAllData(allTablesData, tableNames)
+				
+				try:
+					os.system("shortcuts run Add\ Shifts\ to\ Calendar")
+					print("Adding shifts to calendar.")
+				except Exception as e:
+					print("Failed to add shifts to calendar,\nplease do this manually.")
 				
 				self.continueProgram = False
 				
