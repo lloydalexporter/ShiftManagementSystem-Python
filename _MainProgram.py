@@ -136,7 +136,7 @@ class Main:
 				self.cM.exportAllData(allTablesData, tableNames)
 				
 				try:
-					os.system("shortcuts run Add\ Shifts\ to\ Calendar")
+					os.system("shortcuts run Add\ Shifts\ to\ Calendar &")
 					print("Adding shifts to calendar.")
 				except Exception as e:
 					print("Failed to add shifts to calendar,\nplease do this manually.")
