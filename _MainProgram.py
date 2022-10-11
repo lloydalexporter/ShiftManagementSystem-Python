@@ -65,6 +65,7 @@ class Main:
 	def viewMonthDataChoice(self):
 		tableNames = self.dM.getTableNames() # Get the names of all the tables.
 		tableName = self.mO.chooseTableName(tableNames, "What month would you like to view?\n") # Choose the table name from the list of table names.
+		if tableName == "quit": return # If the user wants to quit, we quit.
 		monthData = self.dM.getTableData(tableName) # Get the data from the table.
 		self.mO.printMonthData(tableName, monthData) # Print this data.
 
@@ -86,7 +87,9 @@ class Main:
 	def editPayDataChoice(self):
 		tableNames = self.dM.getTableNames() # Get the names of all the tables.
 		tableName = self.mO.chooseTableName(tableNames, "What month would you like to edit pay data for?\n") # Choose the table name from the list of table names.
+		if tableName == "quit": return # If the user wants to quit, we quit.
 		newPay = self.mO.inputNewPayPerHour() # Get the new pay per hour.
+		if newPay == "quit": return # If the user wants to quit, we quit.
 		self.dM.editPayDataTable(tableName, newPay) # Set the new pay amount for the tableName.
 
 		
@@ -102,6 +105,8 @@ class Main:
 				try:
 					tableNames = self.dM.getTableNames() # Get the names of all the tables.
 					tableName = self.mO.choosePayCheque(tableNames, self.CURRENT_YEAR, self.CURRENT_MONTH, self.CURRENT_DAY) # Choose the month to calculate.
+					
+					if tableName == "quit": return # If the user wants to quit, we quit.
 					
 					previousMonthTableIndex = tableNames.index(tableName) + 1 # Get the index of the previous month.
 					previousMonthTableName = tableNames[previousMonthTableIndex] # Get the previous month table name.

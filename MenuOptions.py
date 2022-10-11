@@ -25,7 +25,16 @@ class MenuOptions:
 	
 	# >>> Get a user input for the pay per hour amount.
 	def inputNewPayPerHour(self):
-		newPPH = float(input("\nNew Pay Per Hour: £")) # Get the new pay per hour.
+		
+		while True: # Loop until we get a valid user input.
+			newPPH = input("\nNew Pay Per Hour: £").upper().strip() # Get user input, make it upper case.
+			if newPPH == 'Q': return "quit" # Return with quit.
+			try:
+				newPPH = float(newPPH) # Try to make the input a float, if this is successful,
+				break # break the loop.
+			except:
+				continue # Else continue the loop.
+			
 		return newPPH # Return the pay her hour.
 	
 	
@@ -39,7 +48,7 @@ class MenuOptions:
 			if choice in validInputs: # If the user input is valid,
 				break # break out of the loop.
 			if (includeQuit) and (choice == 'Q'): # If we can quit, and the choice is quit,
-				break # break out of the loop.
+				return "quit" # Return with quit.
 		
 		return choice # Return the user's choice.
 	
@@ -57,13 +66,15 @@ class MenuOptions:
 		print("1) Next Pay Cheque") # The most recent table.
 		print("2) Other") # View other tables.
 		
-		choice = self.getUserInput(validInputs, "#?", False) # Get the user input.
+		choice = self.getUserInput(validInputs, "#?", True) # Get the user input.
 		if choice == '1': # If the user wants the most recent pay cheque,
 			if int(CURRENT_DAY) > int(self.payDay): # If the day past pay cheque day,
 				CURRENT_MONTH = str(int(CURRENT_MONTH) + 1) # set the month to next month.
 			if len(CURRENT_MONTH) == 1: # If the current month is only one number in length,
 				CURRENT_MONTH = '0' + CURRENT_MONTH # add the leading ZERO.
 			tableName = CURRENT_YEAR + '_' + CURRENT_MONTH # Set the tableName.
+		elif choice == 'quit':
+			return choice
 		else:
 			tableName = self.chooseTableName(tableNames, "For what month would you like to calculate?\n") # Else choose from the list of table names.
 		
@@ -81,7 +92,9 @@ class MenuOptions:
 		for x in range(len(validInputs)): # For every valid input,
 			print("%d) %s" % (x+1, tableNames[x])) # print a row.
 		
-		choice = self.getUserInput(validInputs, "#?", False) # Get user input.
+		choice = self.getUserInput(validInputs, "#?", True) # Get user input.
+		if choice == 'quit': return "quit"
+			
 		tableName = tableNames[int(choice)-1] # Get the corresponding table name.
 		
 		return tableName # Return the table name.
@@ -99,7 +112,7 @@ class MenuOptions:
 		for r in monthData: # For every row of monthData,
 			temp = tableName.replace('_', '-') + "-" + str(r[1])
 			date = pd.Timestamp(temp)
-			print("%.3s | %4d | %s | %s | %.5g" % (date.day_name(), r[1], r[2], r[3], float(r[5]))) # print the data nicely,
+			print("%.3s | %4d | %5s | %5s | %.5g" % (date.day_name(), r[1], r[2], r[3], float(r[5]))) # print the data nicely,
 			workingHours += r[5] # and add the working hours.
 			
 		print("\nShifts: %2d  | Working Hours: %g" % (len(monthData), workingHours)) # Print the footer.
