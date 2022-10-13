@@ -38,7 +38,7 @@ class Main:
 		self.PAY_DAY = "28"
 		
 		
-		# >>> Show the dashboard.
+	# >>> Show the dashboard.
 	def showDashboard(self):
 		self.mO.workOutPaymentDay(self.CURRENT_YEAR, self.CURRENT_MONTH, self.PAY_DAY) # Update mO class paydates.
 		
@@ -56,7 +56,7 @@ class Main:
 		self.mO.dashboard(payChequeValue) # Launch the dashboard.
 		
 		
-		# >>> Calculate pay cheque.
+	# >>> Calculate pay cheque.
 	def calculatePayChequeChoice(self, previousMonthTableName, tableName, doPrint):
 		previousMonthData, currentMonthData, shiftCount = self.dM.getPayChequeData(previousMonthTableName, tableName, self.DIVIDER_DAY) # Get the hours data.
 		previousMonthTotalHours, currentMonthTotalHours = self.dM.calculatePayCheque(previousMonthData, currentMonthData) # Calculate the total hours.
@@ -77,7 +77,7 @@ class Main:
 		self.mO.printMonthData(tableName, monthData) # Print this data.
 		
 		
-		# >>> Import a new csv file.
+	# >>> Import a new csv file.
 	def importANewCSVFileChoice(self):
 		self.cM.clearArrays() # Clear all of the arrays.
 		if self.cM.selectFile(): return # Select the csv file, and if the user has entered Q, quit.
@@ -90,7 +90,7 @@ class Main:
 		print("\nDone.", end='') # Tell the user that we are done importing the new csv file.
 		
 		
-		# >>> Edit pay data.
+	# >>> Edit pay data.
 	def editPayDataChoice(self):
 		tableNames = self.dM.getTableNames() # Get the names of all the tables.
 		tableName = self.mO.chooseTableName(tableNames, "What month would you like to edit pay data for?\n") # Choose the table name from the list of table names.
@@ -100,7 +100,7 @@ class Main:
 		self.dM.editPayDataTable(tableName, newPay) # Set the new pay amount for the tableName.
 		
 		
-		# >>> The beginning of the program.
+	# >>> The beginning of the program.
 	def beginProgram(self):
 		
 		menuChoices = ("Calculate pay cheque","View month data","Import a new csv file","Edit pay data")
@@ -164,8 +164,8 @@ class Main:
 				self.continueProgram = False
 				
 				
-			# ! - \/ \/ \/ \/ \/ - ! #
-			# ! - - -  Main  - - - ! #
+# ! - \/ \/ \/ \/ \/ - ! #
+# ! - - -  Main  - - - ! #
 if __name__ == "__main__":
 	
 	initMain = Main()
