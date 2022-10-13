@@ -36,7 +36,9 @@ class MenuOptions:
 				continue # Else continue the loop.
 			
 		return newPPH # Return the pay her hour.
-	
+
+	# >>> Get the year of the shift.
+	def inputShiftYear(self): pass
 	
 	# >>> Get a user input from allowed inputs list.
 	def getUserInput(self, validInputs, question, includeQuit):

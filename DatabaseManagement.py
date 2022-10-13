@@ -3,6 +3,7 @@
 
 # ! - Libraries - ! #
 import csv
+import hashlib
 import pandas as pd
 import sqlite3 as lite
 from pprint import pprint as pp
@@ -14,10 +15,18 @@ class DatabaseManagement:
 	def __init__(self): # Always run.
 		self.ifMain = False # Initialise and set to False.
 		if __name__ == "__main__": self.ifMain = True # If this is Main, set to True.
+  
+		self.DB_FILE = "_lib/ShiftData.db"
 		
-		self.connection = lite.connect("_lib/ShiftData.db") # Connect to the test database file.
+		self.connection = lite.connect(self.DB_FILE) # Connect to the test database file.
 		
 		self.cursor = self.connection.cursor() # Add the cursor (idek, it just needs to exist).
+  
+  
+	# >>> Get the hash of the database file.
+	def hashFile(self):
+		with open(self.DB_FILE, 'rb'): # Open the file,
+			return hashlib.md5(open(self.DB_FILE, 'rb').read()).hexdigest() # and return the hash of the file.
 	
 	
 	# >>> Delete data from database.
