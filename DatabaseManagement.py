@@ -88,14 +88,19 @@ class DatabaseManagement:
     def saveData(self, dataArray, CURRENT_YEAR, CURRENT_MONTH):
 
         month = dataArray[0][0] # Get the month.
+        year = CURRENT_YEAR # Set the year to current year.
 
-        year = CURRENT_YEAR
-
-        if CURRENT_MONTH == "12": # If the actual month is December ...
-            if month == "01": # ... and the month we're adding is January ...
-                year = str(int(year) + 1) # ... then add one to the year.
-
-        if CURRENT_MONTH < month: pass
+        if int(month) < int(CURRENT_MONTH): # If the month is before the current month,
+            print("Is this replacement data? Or for next year?")
+            print("1)", year)
+            print("2)", int(year) + 1)
+            while True: # get the year the user wants.
+                try:
+                    choice = int(input("#? ").strip()) # Get the year input as an integer.
+                    if choice == 2: year = str(int(year) + 1) # If the choice is 2, choose the next year.
+                    break # Break from the loop.
+                except:
+                    continue # Else continue.
 
         tableName = year + "_" + month # Format the table name from the year and month.
 
