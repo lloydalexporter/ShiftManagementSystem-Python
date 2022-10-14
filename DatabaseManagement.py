@@ -122,7 +122,11 @@ class DatabaseManagement:
     # >>> Save a new table to the pay data table.
     def saveNewPayData(self, tableName):
         payAmount = self.getPreviousPayData() # Get the previous pay amount.
-        self.cursor.execute("DELETE FROM \"PayDataTable\" WHERE \"tableName\"=\"?\"",(tableName)) # Insert pay data into table.
+        self.cursor.execute("SELECT \"tableName\" FROM \"PayDataTable\" WHERE \"tableName\"=?;",[tableName]) # See if there is any data for this tableName.
+        data = self.cursor.fetchall() # Fetch the selected data.
+        if len(data) > 0: # If there are tableName values already, delete them.
+            self.cursor.execute("DELETE FROM \"PayDataTable\" WHERE \"tableName\"=?;",[tableName]) # Insert pay data into table.
+            self.connection.commit() # Commit the connecton.
         self.cursor.execute("INSERT INTO \"PayDataTable\" VALUES (?,?)",(tableName,payAmount)) # Insert pay data into table.
         self.connection.commit() # Commit the connecton.
 

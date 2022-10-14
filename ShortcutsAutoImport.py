@@ -19,10 +19,10 @@ CURRENT_DAY   = str(date.today().day) # Set the current day.
 
 # >>> Check if a file was passed as an argument.
 try:
-	cM.CSV_FILE = sys.argv[1] # Set the csv file to the command-line argument.
+    cM.CSV_FILE = sys.argv[1] # Set the csv file to the command-line argument.
 except Exception as e:
-	print("No argument was passed to the main python file execution.") # Tell the user what went wrong.
-	quit() # Quit.
+    print("No argument was passed to the main python file execution.") # Tell the user what went wrong.
+    quit() # Quit.
 
 
 # >>> Import the csv file.
