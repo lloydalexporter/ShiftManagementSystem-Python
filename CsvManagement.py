@@ -51,7 +51,7 @@ class CsvManagement:
     def create2DArray(self, column, row):
         array = [[0 for _ in range(column)] for _ in range(row)] # The code to create one, using the two parameters that were passed.
         return array # Return this 2D array.
-
+    
 
     # >>> Clear arrays.
     def clearArrays(self):
@@ -68,7 +68,7 @@ class CsvManagement:
 
         # >>> Get csv file path from user input and validate.
         while True: # Loop until valid user input.
-            self.CSV_FILE = input("\nEnter the file path of the CSV file:\nFile path -> ").strip() # Ask for the csv file path.
+            self.CSV_FILE = input("\nEnter the file path of the CSV file:\nFile path -> ").strip().strip("\"'") # Ask for the csv file path.
             if self.CSV_FILE == ('q' or 'Q'): # If user wants to quit,
                 return True # return True.
             if exists(self.CSV_FILE): # If file exists, user input is valid,
@@ -126,17 +126,18 @@ class CsvManagement:
 
         # >>> Make the start times 24Hr.
         if self.ifMain: print("startArray", self.startArray, end="\n")
-        self.startArray = [ start.replace("AM", '').strip() for start in self.startArray ] # Strip AM.
+        self.startArray = [ start.replace("AM", '').replace("PM", '').strip() for start in self.startArray ] # Strip AM.
         if self.ifMain: print("startArray", self.startArray, end="\n\n\n")
 
         # >>> Make the end times 24HR.
         if self.ifMain: print("endArray", self.endArray)
-        self.endArray = [ end.replace("PM", '').strip() for end in self.endArray ] # Strip PM.
+        self.endArray = [ end.replace("AM", '').replace("PM", '').strip() for end in self.endArray ] # Strip PM.
         self.endArray = [ str(int(end.split(':')[0]) + 12) + ':' + end.split(':')[1] for end in self.endArray ] # Format to 24Hr.
         if self.ifMain: print("endArray", self.endArray, end="\n\n\n")
 
         # >>> Create and fill duration array.
         for i in range(self.recordCount):
+            if self.ifMain: print(i, self.startArray[i], self.endArray[i])
             startTime = pd.to_datetime(self.startArray[i], format=self.TIME_FORMAT_STR) # Format and set the start time.
             endTime = pd.to_datetime(self.endArray[i], format=self.TIME_FORMAT_STR) # Format and set the end time.
             diffTime = ((endTime - startTime).total_seconds() / 3600) # Calculate the difference, divide into hours.
