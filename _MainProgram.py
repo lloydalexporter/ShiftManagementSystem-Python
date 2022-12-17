@@ -180,8 +180,7 @@ if __name__ == "__main__":
 
     """
     STUFF TO DO:
-
-    - Make sure that this works at the new years.
-    - Possibly add some shortcuts stuff.
+    - Any way to add sick pay?
+        - Probably not as it cannot determine the difference between time off and paid time off as they appear as the same.
 
     """
