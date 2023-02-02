@@ -98,12 +98,19 @@ class Main:
         newPay = self.mO.inputNewPayPerHour() # Get the new pay per hour.
         if newPay == "quit": return # If the user wants to quit, we quit.
         self.dM.editPayDataTable(tableName, newPay) # Set the new pay amount for the tableName.
+        
+    
+    # >>> Show overall statistics.
+    def showOverallStatistics(self):
+        tableNames = self.dM.getTableNames() # Get the names of all the tables.
+        (totalShiftCount, totalAmountEarned, totalHoursWorked) = self.dM.getAllStatisticData(tableNames) # Get the statistic data.
+        self.mO.printStatisticData(totalShiftCount, totalAmountEarned, totalHoursWorked) # Print this data nicely.
 
 
     # >>> The beginning of the program.
     def beginProgram(self):
 
-        menuChoices = ("Calculate pay cheque","View month data","Import a new csv file","Edit pay data")
+        menuChoices = ("Calculate pay cheque","View month data","Import a new csv file","Edit pay data", "Overall statistics")
         choice = self.mO.mainMenu(menuChoices) # Get a choice from the main menu.
 
         # >>> What now after choice?
@@ -134,6 +141,12 @@ class Main:
             case '4': # "4) Edit pay data."
                 try:
                     self.editPayDataChoice() # Run choice function.
+                except Exception as e:
+                    self.mO.printErrorDetails(e, menuChoices[int(choice)-1]) # Print the custom error message.
+                    
+            case '5': # "5) Overall statistics."
+                try:
+                    self.showOverallStatistics() # Run choice function.
                 except Exception as e:
                     self.mO.printErrorDetails(e, menuChoices[int(choice)-1]) # Print the custom error message.
 

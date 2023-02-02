@@ -172,6 +172,53 @@ class DatabaseManagement:
             allTablesData.append(self.cursor.fetchall()) # then fetch and save it to the allTablesData array.
 
         return allTablesData # Return this data.
+    
+    
+    # >>> Get the total shift count.
+    def getTotalShiftCount(self, allTablesData):
+        
+        totalShiftCount = 0 # Initialise the total shift counter.
+        for table in allTablesData: # For every table in all tables data.
+            for shift in table: # For every shift in the table.
+                totalShiftCount += 1 # Increment the total shift count.
+                
+        return totalShiftCount # Return the total shift count.
+
+    
+    # >>> Get the total amount earned.
+    def getTotalAmountEarned(self, tableNames):
+        
+        totalAmountEarned = 0 # Initialise the total amount earned.
+        for tableName in tableNames: # For every table name in table names.
+            hourlyPay = self.getHourlyPay(tableName) # Get the hourly pay for the table.
+            for shift in self.getTableData(tableName): # For every shift in the current table.
+                totalAmountEarned += hourlyPay * shift[5] # Add the hourly pay multiplied by the shift hours.
+                
+        return totalAmountEarned # Return the total shift count.
+    
+    
+    # >>> Get the total hours worked.
+    def getTotalHoursWorked(self, allTablesData):
+        
+        totalHoursWorked = 0 # Initialise the total hours worked.
+        for table in allTablesData: # For every table in all tables data.
+            for shift in table: # For every shift in the table.
+                totalHoursWorked += shift[5] # Increment the total shift count.
+        
+        return totalHoursWorked # Return the total shift count.
+    
+    
+    # >>> Get all of the statistic data.
+    def getAllStatisticData(self, tableNames):
+        
+        allTablesData = self.getAllData(tableNames) # Get all the data from the database.
+        
+        totalShiftCount = self.getTotalShiftCount(allTablesData) # Get the total shift count.
+        totalAmountEarned = self.getTotalAmountEarned(tableNames) # Get the total amount earned.
+        totalHoursWorked = self.getTotalHoursWorked(allTablesData) # Get the total hours worked.
+        
+        return (totalShiftCount, totalAmountEarned, totalHoursWorked) # Return the statistic data.
+        
 
 
 

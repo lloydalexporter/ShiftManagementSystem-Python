@@ -215,12 +215,23 @@ class MenuOptions:
 
         dateFormat = "%d-%02d-%02d" % (int(year), int(month), int(day)) # Format the date.
         date = dt.datetime.strptime(dateFormat, '%Y-%m-%d') # Set as date object.
-        dayOfWeek = date.strftime('%a')
-        monthName = date.strftime('%b')
+        dayOfWeek = date.strftime('%a') # Get the day of the week.
+        monthName = date.strftime('%b') # Get the name of the month.
 
-        fullDate = "%s-%s-%s-%s" % (dayOfWeek, day, monthName, year)
+        fullDate = "%s-%s-%s-%s" % (dayOfWeek, day, monthName, year) # Create a pretty date format using the date data gathered.
 
-        return fullDate
+        return fullDate # Return the full date.
+    
+    
+    # >>> Print statistic data.
+    def printStatisticData(self, totalShiftCount, totalAmountEarned, totalHoursWorked):
+        self.clear() # Clear the screen.
+        
+        print("\nTotal Shift Count:", totalShiftCount)
+        print("Total Amount Earned:", Decimal(totalAmountEarned).quantize(self.TWO_DP))
+        print("Total Hours Worked:", totalHoursWorked)
+        
+        print("\n\033[1m£%.2f\033[0m earned over \033[1m%d shifts\033[0m totaling to \033[1m%g hours\033[0m worked." % (Decimal(totalAmountEarned).quantize(self.TWO_DP), totalShiftCount, totalHoursWorked))
 
 
     # >>> Print the dashboard with all the quick data.
