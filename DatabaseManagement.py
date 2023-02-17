@@ -90,7 +90,6 @@ class DatabaseManagement:
         month = dataArray[0][0] # Get the month.
         year = CURRENT_YEAR # Set the year to current year.
 
-        """
         if int(month) < int(CURRENT_MONTH): # If the month is before the current month,
             print("Is this replacement data? Or for next year?")
             print("1)", year)
@@ -101,10 +100,7 @@ class DatabaseManagement:
                     if choice == 2: year = str(int(year) + 1) # If the choice is 2, choose the next year.
                     break # Break from the loop.
                 except:
-                    continue # Else continue.
-        """
-        
-        year = str(input("Year: "))
+                    continue # Else continue.        
 
         tableName = year + "_" + month # Format the table name from the year and month.
 
