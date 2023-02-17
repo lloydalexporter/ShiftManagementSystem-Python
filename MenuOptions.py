@@ -112,9 +112,9 @@ class MenuOptions:
         print("\nDay | Date | Start |  End  | Hours") # Print the table header
 
         for r in monthData: # For every row of monthData,
-            temp = tableName.replace('_', '-') + "-" + str(r[1])
+            temp = tableName.replace('_', '-') + "-" + str(r[2])
             date = pd.Timestamp(temp)
-            print("%.3s | %4d | %5s | %5s | %.5g" % (date.day_name(), r[1], r[2], r[3], float(r[5]))) # print the data nicely,
+            print("%.3s | %4d | %5s | %5s | %.5g" % (date.day_name(), r[2], r[3], r[4], float(r[6]))) # print the data nicely,
             workingHours += r[5] # and add the working hours.
 
         print("\nShifts: %2d  | Working Hours: %g" % (len(monthData), workingHours)) # Print the footer.

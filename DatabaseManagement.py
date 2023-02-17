@@ -90,6 +90,7 @@ class DatabaseManagement:
         month = dataArray[0][0] # Get the month.
         year = CURRENT_YEAR # Set the year to current year.
 
+        """
         if int(month) < int(CURRENT_MONTH): # If the month is before the current month,
             print("Is this replacement data? Or for next year?")
             print("1)", year)
@@ -101,16 +102,19 @@ class DatabaseManagement:
                     break # Break from the loop.
                 except:
                     continue # Else continue.
+        """
+        
+        year = str(input("Year: "))
 
         tableName = year + "_" + month # Format the table name from the year and month.
 
         self.deleteData(tableName) # Delete the existing data.
 
-        columns = "(columnMonth INT, columnDay INT, columnStartTime CHAR(5), columnEndTime CHAR(5), columnDuration DOUBLE(4,2), columnPaidHours DOUBLE(4,2))" # Setup the columns of the table.
+        columns = "(columnYear INT, columnMonth INT, columnDay INT, columnStartTime CHAR(5), columnEndTime CHAR(5), columnDuration DOUBLE(4,2), columnPaidHours DOUBLE(4,2))" # Setup the columns of the table.
         self.cursor.execute("CREATE TABLE IF NOT EXISTS \"" + tableName + "\" " + columns) # Create the table.
 
         for i in range(len(dataArray)): # For every row, insert the data.
-            self.cursor.execute("INSERT INTO \"" + tableName + "\" " + " VALUES (?,?,?,?,?,?)",(dataArray[i][0],dataArray[i][1],dataArray[i][2],dataArray[i][3],dataArray[i][4],dataArray[i][5]))
+            self.cursor.execute("INSERT INTO \"" + tableName + "\" " + " VALUES (?,?,?,?,?,?,?)",(year,dataArray[i][0],dataArray[i][1],dataArray[i][2],dataArray[i][3],dataArray[i][4],dataArray[i][5]))
 
         self.connection.commit() # Commit the connecton.
 

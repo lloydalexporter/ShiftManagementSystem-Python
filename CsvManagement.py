@@ -18,8 +18,8 @@ class CsvManagement:
     TWO_DP = Decimal(10) ** -2 # Set the number of decimal places.
     CSV_EXPORT = '_lib/shiftData.csv' # Set the export csv location.
     FIELDS = {
-        "F_DAY" : 0,
-        "F_MONTH" : 1,
+        "F_MONTH" : 0,
+        "F_DAY" : 1,
         "F_START" : 2,
         "F_END" : 3,
         "F_DURATION" : 4,
@@ -55,6 +55,7 @@ class CsvManagement:
 
     # >>> Clear arrays.
     def clearArrays(self):
+        self.yearArray = []
         self.monthArray = []
         self.dayArray = []
         self.startArray = []
