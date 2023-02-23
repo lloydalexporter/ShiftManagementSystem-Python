@@ -235,29 +235,32 @@ class MenuOptions:
 
 
     # >>> Print the dashboard with all the quick data.
-    def dashboard(self, payChequeValue):
+    def dashboard(self, payChequeValue, doPrint):
         self.clear() # Clear the screen.
 
         # >>> Print title header.
-        print("Shift Management System")
-        print("–––––––––––––––––––––––")
+        if doPrint: print("Shift Management System")
+        if doPrint: print("–––––––––––––––––––––––")
 
         # >>> Next payment date.
-        print("Next Payment Due:\n%23s" % self.getPrettyDate(self.payYear, self.payMonth, self.payDay))
+        nextPaymentDate = self.getPrettyDate(self.payYear, self.payMonth, self.payDay)
+        if doPrint: print("Next Payment Due:\n%23s" % nextPaymentDate)
 
         # >>> Next pay cheque amount.
         payChequeFormatted = "£ " + str(Decimal(payChequeValue).quantize(self.TWO_DP))
-        print("Next Pay Cheque:\n%23s" % payChequeFormatted)
+        if doPrint: print("Next Pay Cheque:\n%23s" % payChequeFormatted)
 
         # >>> Days until pay cheque.
         today = dt.date.today()
         payChequeDate = dt.date(int(self.payYear), int(self.payMonth), int(self.payDay))
         dayDifference = (payChequeDate - today).days
         dayDifference = str(dayDifference) + " day" if dayDifference == 1 else str(dayDifference) + " days" # Add the dynamic days text.
-        print("Payment due in:\n%23s" % dayDifference)
+        if doPrint: print("Payment due in:\n%23s" % dayDifference)
 
         # >>> Print the footer.
-        print("–––––––––––––––––––––––")
+        if doPrint: print("–––––––––––––––––––––––")
+        
+        return nextPaymentDate, payChequeFormatted
 
 
     # >>> Program quitting screen.

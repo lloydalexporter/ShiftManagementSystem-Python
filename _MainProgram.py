@@ -39,7 +39,7 @@ class Main:
 
 
     # >>> Show the dashboard.
-    def showDashboard(self):
+    def showDashboard(self, doPrint):
         self.mO.workOutPaymentDay(self.CURRENT_YEAR, self.CURRENT_MONTH, self.PAY_DAY) # Update mO class paydates.
 
         if int(self.CURRENT_DAY) > int(self.mO.payDay): # If the current date is after this months payday, get next month.
@@ -53,7 +53,8 @@ class Main:
         except:
             payChequeValue = 0.00 # If it fails, set to ZERO.
 
-        self.mO.dashboard(payChequeValue) # Launch the dashboard.
+        nextPaymentDate, payChequeFormatted = self.mO.dashboard(payChequeValue, doPrint) # Launch the dashboard, and get the dashboard data.
+        self.cM.exportDashboardData(nextPaymentDate, payChequeFormatted) # Export the dashboard data.
 
 
     # >>> Calculate pay cheque.
@@ -155,7 +156,8 @@ class Main:
 
                 tableNames = self.dM.getTableNames() # Get the names of all the tables.
                 allTablesData = self.dM.getAllData(tableNames) # Get all of the data.
-                self.cM.exportAllData(allTablesData, tableNames) # Export all csv data.
+                self.cM.exportAllData(allTablesData) # Export all csv data.
+                self.showDashboard(False) # Export the dashboard in case of changes.
 
                 # >>> Check whether to run the shortcuts file.
                 try:
@@ -163,6 +165,8 @@ class Main:
                     if self.ORIGINAL_MD5 != NEW_MD5: # If the MD5s are different.
                         os.system("shortcuts run Add\ Shifts\ to\ Calendar &") # Run the shortcut to a add the shifts to the calendar.
                         print("Adding new shifts to calendar.")
+                        #os.system("shortcuts run Add\ Shifts\ to\ Calendar &") # Run the shortcut to a add the shifts to the calendar.
+                        print("Exporting paycheque dashboard.")
                 except Exception as e:
                     print("Failed to add shifts to calendar,\nplease do this manually.")
 
@@ -180,7 +184,7 @@ if __name__ == "__main__":
 
     initMain = Main()
 
-    initMain.showDashboard() # Show the dashboard at the very start.
+    initMain.showDashboard(True) # Show the dashboard at the very start.
 
 
     while initMain.continueProgram: # Loop until we want to exit.

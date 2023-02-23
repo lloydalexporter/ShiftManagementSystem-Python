@@ -17,6 +17,7 @@ class CsvManagement:
     TIME_FORMAT_STR = '%H:%M' # Format used for time data.
     TWO_DP = Decimal(10) ** -2 # Set the number of decimal places.
     CSV_EXPORT = '_lib/shiftData.csv' # Set the export csv location.
+    DASH_EXPORT = '_lib/dashboard.txt' # Set the dashboard file location.
     FIELDS = {
         "F_MONTH" : 0,
         "F_DAY" : 1,
@@ -183,7 +184,7 @@ class CsvManagement:
 
 
     # >>> Export all the data.
-    def exportAllData(self, allTablesData, tableNames):
+    def exportAllData(self, allTablesData):
 
         with open(self.CSV_EXPORT, 'w') as csvFile: # Prepare to write the csv file.
             writer = csv.writer(csvFile)
@@ -193,6 +194,19 @@ class CsvManagement:
 
         csvFile.close() # Close the csv file.
 
+
+    # >>> Export dashboard data.
+    def exportDashboardData(self, nextPaymentDate, payChequeFormatted):
+        
+        dashFile = open(self.DASH_EXPORT, 'w')
+            
+        dashFile.write(nextPaymentDate)
+        dashFile.write('\n')
+        dashFile.write(payChequeFormatted)
+        dashFile.write('\n')
+
+        dashFile.close() # Close the dashboard file.
+        
 
 
 # ! - \/ \/ \/ \/ \/ - ! #
