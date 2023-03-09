@@ -40,7 +40,7 @@ class Main:
 
     # >>> Show the dashboard.
     def showDashboard(self, doPrint):
-        self.mO.workOutPaymentDay(self.CURRENT_YEAR, self.CURRENT_MONTH, self.PAY_DAY) # Update mO class paydates.
+        self.mO.workOutPaymentDay(self.CURRENT_YEAR, self.CURRENT_MONTH, self.PAY_DAY) # Update mO class pay dates.
 
         if int(self.CURRENT_DAY) > int(self.mO.payDay): # If the current date is after this months payday, get next month.
             self.mO.workOutPaymentDay(self.CURRENT_YEAR, str(int(self.CURRENT_MONTH) + 1), self.PAY_DAY) # Add one month if it's past the payday.
@@ -78,7 +78,7 @@ class Main:
         self.mO.printMonthData(tableName, monthData) # Print this data.
 
 
-    # >>> Import a new csv file.
+    # >>> Import a new csv file.    
     def importANewCSVFileChoice(self):
         self.cM.clearArrays() # Clear all of the arrays.
         if self.cM.selectFile(): return # Select the csv file, and if the user has entered Q, quit.
