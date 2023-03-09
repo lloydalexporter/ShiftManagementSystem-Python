@@ -2,6 +2,7 @@
 
 
 # ! - Libraries - ! #
+import os
 import csv
 import datetime
 import pandas as pd
@@ -17,7 +18,7 @@ class CsvManagement:
     TIME_FORMAT_STR = '%H:%M' # Format used for time data.
     TWO_DP = Decimal(10) ** -2 # Set the number of decimal places.
     CSV_EXPORT = '_lib/shiftData.csv' # Set the export csv location.
-    DASH_EXPORT = '_lib/dashboard.txt' # Set the dashboard file location.
+    PAY_EXPORT = '_lib/paycheques.txt' # Set the paycheques file location.
     FIELDS = {
         "F_MONTH" : 0,
         "F_DAY" : 1,
@@ -40,6 +41,10 @@ class CsvManagement:
         "Nov": 11,
         "Dec": 12
     } # Dictionary for replacing Month name with Month number.
+    try:
+        os.remove(PAY_EXPORT) # Remove the paycheques file.
+    except:
+        pass
 
 
     # ! - Functions - ! #
@@ -195,17 +200,17 @@ class CsvManagement:
         csvFile.close() # Close the csv file.
 
 
-    # >>> Export dashboard data.
-    def exportDashboardData(self, nextPaymentDate, payChequeFormatted):
+    # >>> Export paycheques data.
+    def exportPaychequeData(self, nextPaymentDate, payChequeFormatted):
         
-        dashFile = open(self.DASH_EXPORT, 'w')
+        payFile = open(self.PAY_EXPORT, 'a')
             
-        dashFile.write(nextPaymentDate)
-        dashFile.write('\n')
-        dashFile.write(payChequeFormatted)
-        dashFile.write('\n')
+        payFile.write(nextPaymentDate)
+        payFile.write('\n')
+        payFile.write(payChequeFormatted)
+        payFile.write('\n')
 
-        dashFile.close() # Close the dashboard file.
+        payFile.close() # Close the paycheques file.
         
 
 

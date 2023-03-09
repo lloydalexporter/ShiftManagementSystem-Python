@@ -53,8 +53,7 @@ class Main:
         except:
             payChequeValue = 0.00 # If it fails, set to ZERO.
 
-        nextPaymentDate, payChequeFormatted = self.mO.dashboard(payChequeValue, doPrint) # Launch the dashboard, and get the dashboard data.
-        self.cM.exportDashboardData(nextPaymentDate, payChequeFormatted) # Export the dashboard data.
+        self.mO.dashboard(payChequeValue, doPrint) # Launch the dashboard, and get the dashboard data.
 
 
     # >>> Calculate pay cheque.
@@ -169,6 +168,17 @@ class Main:
                         print("Exporting paycheque dashboard.")
                 except Exception as e:
                     print("Failed to add shifts to calendar,\nplease do this manually.")
+                    
+                # >>> Export Paycheques.
+                for tableName in tableNames:
+                    try: # Try to get and export the 
+                        previousMonthTableIndex = tableNames.index(tableName) + 1 # Get the index of the previous month.
+                        previousMonthTableName = tableNames[previousMonthTableIndex] # Get the previous month table name.
+                        payChequeValue = self.calculatePayChequeChoice(previousMonthTableName, tableName, False) # Run choice function.
+                        nextPaymentDate, payChequeFormatted = self.mO.dashboard(payChequeValue, False) # Launch the dashboard, and get the dashboard data.
+                        self.cM.exportPaychequeData(nextPaymentDate, payChequeFormatted) # Export the paycheque data.
+                    except:
+                        break
 
                 self.continueProgram = False
 
