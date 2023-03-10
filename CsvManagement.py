@@ -203,12 +203,12 @@ class CsvManagement:
     # >>> Export paycheques data.
     def exportPaychequeData(self, nextPaymentDate, payChequeFormatted):
         
-        payFile = open(self.PAY_EXPORT, 'a')
+        payFile = open(self.PAY_EXPORT, 'a') # Prepare to append to the paycheque file.
             
-        payFile.write(nextPaymentDate)
-        payFile.write('\n')
-        payFile.write(payChequeFormatted)
-        payFile.write('\n')
+        payFile.write(nextPaymentDate) # Write the paycheque date,
+        payFile.write(' | ') # add the separator,
+        payFile.write(payChequeFormatted) # add the paycheque price,
+        payFile.write('\n') # add the new line character.
 
         payFile.close() # Close the paycheques file.
         
