@@ -248,7 +248,7 @@ class MenuOptions:
 
         # >>> Next pay cheque amount.
         payChequeFormatted = "£ " + str(Decimal(payChequeValue).quantize(self.TWO_DP))
-        if doPrint: print("Next Pay Cheque:\n%23s" % payChequeFormatted)
+        if doPrint: print("Paycheque Value:\n%23s" % payChequeFormatted)
 
         # >>> Days until pay cheque.
         today = dt.date.today()
