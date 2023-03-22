@@ -202,12 +202,3 @@ if __name__ == "__main__":
         initMain.beginProgram() # Run the menu on repeat.
 
     initMain.dM.connection.close() # Close the database connection.
-
-
-
-    """
-    STUFF TO DO:
-    - Any way to add sick pay?
-        - Probably not as it cannot determine the difference between time off and paid time off as they appear as the same.
-
-    """
