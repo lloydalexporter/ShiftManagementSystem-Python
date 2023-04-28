@@ -131,11 +131,25 @@ class Main:
             case '1': # "1) Calculate pay cheque."
                 try:
                     tableNames = self.dM.getTableNames() # Get the names of all the tables.
+                    # tableNames.pop()
                     tableName = self.mO.choosePayCheque(tableNames, self.CURRENT_YEAR, self.CURRENT_MONTH, self.CURRENT_DAY) # Choose the month to calculate.
                     if tableName == "quit": return # If the user wants to quit, we quit.
-                    previousMonthTableIndex = tableNames.index(tableName) + 1 # Get the index of the previous month.
-                    previousMonthTableName = tableNames[previousMonthTableIndex] # Get the previous month table name.
-                    self.calculatePayChequeChoice(previousMonthTableName, tableName, True) # Run choice function.
+                    while True: # Repeat until broken.
+                        previousMonthTableIndex = tableNames.index(tableName) + 1 # Get the index of the previous month.
+                        previousMonthTableName = tableNames[previousMonthTableIndex] # Get the previous month table name.
+                        self.calculatePayChequeChoice(previousMonthTableName, tableName, True) # Run choice function.
+                        if ( tableNames.index(tableName) == 0 ): # If we are at index ZERO,
+                            print("\nFurthest recorded pay cheque.") # tell the user.
+                        elif ( tableNames.index(previousMonthTableName) == (len(tableNames) - 1) ): # If we are at the last index,
+                            print("\nEarliest recorded pay cheque.") # tell the user.
+                        shiftPayChequeCheck = input("\nWASD? ").upper() # See whether the user wants to an adjacent pay cheque.
+                        if  ( ( shiftPayChequeCheck == 'W' ) or ( shiftPayChequeCheck == 'D' ) ): # If the user enters W or D,
+                            if ( tableNames.index(tableName) != 0 ): # and we are not at index ZERO,
+                                tableName = tableNames[tableNames.index(tableName)-1] # view next month.
+                        elif ( shiftPayChequeCheck == 'A' ) or ( shiftPayChequeCheck == 'S' ) : # If the user enters A or S,
+                            if ( tableNames.index(previousMonthTableName) != (len(tableNames) - 1) ): # and we are not at the last index,
+                                tableName =  tableNames[tableNames.index(tableName)+1] # view previous month.
+                        else: return # Else return to the main program.
                 except Exception as e:
                     self.mO.printErrorDetails(e, menuChoices[int(choice)-1]) # Print the custom error message.
 
