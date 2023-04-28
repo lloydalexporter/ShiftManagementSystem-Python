@@ -68,13 +68,26 @@ class Main:
         return payChequeValue
 
 
-    # >>> View month data.
+    # >>> Choose month data.
     def viewMonthDataChoice(self):
         tableNames = self.dM.getTableNames() # Get the names of all the tables.
         tableName = self.mO.chooseTableName(tableNames, "What month would you like to view?\n") # Choose the table name from the list of table names.
         if tableName == "quit": return # If the user wants to quit, we quit.
-        monthData = self.dM.getTableData(tableName) # Get the data from the table.
-        self.mO.printMonthData(tableName, monthData) # Print this data.
+        while True: # Repeat until broken.
+            monthData = self.dM.getTableData(tableName) # Get the data from the table.
+            self.mO.printMonthData(tableName, monthData) # Print this data.
+            if ( tableNames.index(tableName) == 0 ): # If we are at index ZERO,
+                print("\nFurthest recorded month.") # tell the user.
+            elif ( tableNames.index(tableName) == (len(tableNames) - 1) ): # If we are at the last index,
+                print("\nEarliest recorded month.") # tell the user.
+            shiftMonthCheck = input("WASD? ").upper() # See whether the user wants to an adjacent month.
+            if  ( ( shiftMonthCheck == 'W' ) or ( shiftMonthCheck == 'D' ) ): # If the user enters W or D,
+                if ( tableNames.index(tableName) != 0 ): # and we are not at index ZERO,
+                    tableName = tableNames[tableNames.index(tableName)-1] # view next month.
+            elif ( shiftMonthCheck == 'A' ) or ( shiftMonthCheck == 'S' ) : # If the user enters A or S,
+                if ( tableNames.index(tableName) != (len(tableNames) - 1) ): # and we are not at the last index,
+                    tableName =  tableNames[tableNames.index(tableName)+1] # view previous month.
+            else: return # Else return to the main program.
 
 
     # >>> Import a new csv file.    
