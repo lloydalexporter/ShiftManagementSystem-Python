@@ -229,3 +229,9 @@ if __name__ == "__main__":
         initMain.beginProgram() # Run the menu on repeat.
 
     initMain.dM.connection.close() # Close the database connection.
+
+
+
+# TODO: Add cycling between months/shifts in more areas.
+# TODO: Delete csv file after import.
+# TODO: Import multiple csv's in one go.
