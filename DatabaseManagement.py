@@ -43,7 +43,6 @@ class DatabaseManagement:
             tableNames.append(name[0]) # Append the names to the tableNames array.
         tableNames.sort(reverse=True) # Sort, with most recent month first.
         tableNames.remove("PayDataTable") # Remove the PayDataTable from the list.
-        if self.ifMain: print(tableNames)
         return tableNames # Return the table names
 
 

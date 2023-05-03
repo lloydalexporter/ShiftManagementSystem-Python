@@ -232,6 +232,5 @@ if __name__ == "__main__":
 
 
 
-# TODO: Add cycling between months/shifts in more areas.
 # TODO: Delete csv file after import.
 # TODO: Import multiple csv's in one go.
