@@ -92,14 +92,16 @@ class Main:
 
     # >>> Import a new csv file.    
     def importANewCSVFileChoice(self):
-        self.cM.clearArrays() # Clear all of the arrays.
+        # self.cM.clearArrays() # Clear all of the arrays.
         if self.cM.selectFile(): return # Select the csv file, and if the user has entered Q, quit.
-        self.cM.getCSVData() # Get the data from the csv file.
-        self.cM.processCSVData() # Save the data from the csv file
-        self.cM.combineData() # Combine the data into one 2D array.
-        self.dM.saveData(self.cM.dataArray, self.CURRENT_YEAR, self.CURRENT_MONTH) # Save the data from the 2D array to the database.
-        tableName = self.dM.getTableNames()[0]
-        self.dM.saveNewPayData(tableName)
+        for self.cM.CSV_FILE in self.cM.CSV_FILES: # For every file in csv files:
+            self.cM.clearArrays() # Clear all of the arrays.
+            self.cM.getCSVData() # Get the data from the csv file.
+            self.cM.processCSVData() # Save the data from the csv file
+            self.cM.combineData() # Combine the data into one 2D array.
+            self.dM.saveData(self.cM.dataArray, self.CURRENT_YEAR, self.CURRENT_MONTH) # Save the data from the 2D array to the database.
+            tableName = self.dM.getTableNames()[0] # Get the most recent table name.
+            self.dM.saveNewPayData(tableName) # Forward the pay data to the next month.
         print("\nDone.", end='') # Tell the user that we are done importing the new csv file.
 
 
@@ -229,7 +231,3 @@ if __name__ == "__main__":
         initMain.beginProgram() # Run the menu on repeat.
 
     initMain.dM.connection.close() # Close the database connection.
-
-
-
-# TODO: Import multiple csv's in one go.

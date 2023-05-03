@@ -11,6 +11,7 @@ from decimal import Decimal
 from statistics import mode
 from pprint import pprint as pp
 
+import time
 
 class CsvManagement:
 
@@ -78,14 +79,19 @@ class CsvManagement:
             self.CSV_FILE = input("\nEnter the file path of the CSV file:\nFile path -> ").strip().strip("\"'") # Ask for the csv file path.
             if self.CSV_FILE == ('q' or 'Q'): # If user wants to quit,
                 return True # return True.
-            if exists(self.CSV_FILE): # If file exists, user input is valid,
+            if ".csv" in self.CSV_FILE: # If the input is the direct file,
+                if exists(self.CSV_FILE): # If file exists, user input is valid,
+                    self.CSV_FILES = [ self.CSV_FILE ] # Add the csv file to the array.
+                    return False # return False.
+            else: # Else if the input is a folder
+                self.CSV_FILES = [ self.CSV_FILE + csv for csv in os.listdir(self.CSV_FILE) if '.csv' in csv ] # Get all the csv files.
                 return False # return False.
             print("\n! >>> ERROR - File does not exist, try again.") # Say the user input is invalid.
 
 
     # >>> Get the data from the csv file.
     def getCSVData(self):
-
+        
         # >>> Get the number of records.
         self.recordCount = 0
         with open(self.CSV_FILE, 'r') as csvFile: # Open the CSV file under csvFile.
@@ -93,8 +99,8 @@ class CsvManagement:
             next(lines) # Remove the headers.
             for row in lines: # For every row ...
                 for column in row: # ... for every column ...
-                    if column != '': # ... if the column is not empty:
-                        if ":" in column:
+                    if column != '': # ... if the column is not empty ...
+                        if ":" in column: # ... and if it contains a colon:
                             self.recordCount += 1 # Increment recordCount.
         csvFile.close() # Close the csvFile.
 
@@ -153,7 +159,6 @@ class CsvManagement:
         for i in removedIndexes: # For every element in removedIndexes ...
             del self.monthArray[i], self.dayArray[i], self.startArray[i], self.endArray[i], self.durationArray[i], self.paidHoursArray[i] # ... delete the index from all tables.
         self.recordCount = self.recordCount - len(removedIndexes) # Update the record count.
-
 
 
     # >>> Combine data.
