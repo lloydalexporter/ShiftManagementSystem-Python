@@ -167,6 +167,8 @@ class CsvManagement:
             row = [self.monthArray[i], self.dayArray[i], self.startArray[i], self.endArray[i], self.durationArray[i], self.paidHoursArray[i]] # ... create a row of combined data ...
             self.dataArray[i] = row # ... and add it to the dataArray.
 
+        os.remove(self.CSV_FILE) # Remove the csv file.
+
 
     # >>> Export all the data.
     def exportAllData(self, allTablesData):

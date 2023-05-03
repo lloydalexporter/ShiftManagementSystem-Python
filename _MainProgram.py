@@ -232,5 +232,4 @@ if __name__ == "__main__":
 
 
 
-# TODO: Delete csv file after import.
 # TODO: Import multiple csv's in one go.
