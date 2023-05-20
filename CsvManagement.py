@@ -145,7 +145,7 @@ class CsvManagement:
             endTime = pd.to_datetime(self.endArray[i], format=self.TIME_FORMAT_STR) # Format and set the end time.
             diffTime = ((endTime - startTime).total_seconds() / 3600) # Calculate the difference, divide into hours.
             self.durationArray.append(diffTime) # Append result to array.
-            self.paidHoursArray.append(diffTime - 0.50) # Subtract half an hour break, append result to array.
+            self.paidHoursArray.append( ( diffTime - 0.50 ) if ( diffTime > 5 ) else ( diffTime ) ) # Subtract half an hour break if necessary, append result to array.
 
         # >>> Isolate the unnecessary months.
         mostCommonMonth = mode(self.monthArray)
