@@ -36,6 +36,8 @@ class Main:
 
         self.DIVIDER_DAY = "16"
         self.PAY_DAY = "28"
+        
+        self.DELETE_CSV = False
 
 
     # >>> Show the dashboard.
@@ -98,7 +100,7 @@ class Main:
             self.cM.clearArrays() # Clear all of the arrays.
             self.cM.getCSVData() # Get the data from the csv file.
             self.cM.processCSVData() # Save the data from the csv file
-            self.cM.combineData() # Combine the data into one 2D array.
+            self.cM.combineData(self.DELETE_CSV) # Combine the data into one 2D array.
             self.dM.saveData(self.cM.dataArray, self.CURRENT_YEAR, self.CURRENT_MONTH) # Save the data from the 2D array to the database.
             tableName = self.dM.getTableNames()[0] # Get the most recent table name.
             self.dM.saveNewPayData(tableName) # Forward the pay data to the next month.
