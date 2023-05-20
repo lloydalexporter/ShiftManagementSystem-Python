@@ -37,7 +37,7 @@ class Main:
         self.DIVIDER_DAY = "16"
         self.PAY_DAY = "28"
         
-        self.DELETE_CSV = False
+        self.DELETE_CSV = True
 
 
     # >>> Show the dashboard.
