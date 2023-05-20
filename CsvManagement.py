@@ -133,7 +133,7 @@ class CsvManagement:
         self.dayArray = [ str(day).zfill(2) for day in self.dayArray] # Make all values strings with leading Zeros.
 
         # >>> Make the start times 24Hr.
-        self.startArray = [ start.replace("AM", '').replace("PM", '').strip() for start in self.startArray ] # Strip AM.
+        self.startArray = [ start.replace("AM", '').replace("PM",'').strip() if ("AM" in start or "12" in start) else (str(int(start.split(':')[0]) + 12) + ':' + start.split(':')[1]).replace("PM", '').strip() for start in self.startArray ] # Strip AM.
 
         # >>> Make the end times 24HR.
         self.endArray = [ end.replace("AM", '').replace("PM", '').strip() for end in self.endArray ] # Strip PM.
@@ -153,7 +153,7 @@ class CsvManagement:
         for i in range(len(self.monthArray)): # For every month ...
             if self.monthArray[i] != mostCommonMonth: # ... if the month is not the most common month ...
                 removedIndexes.append(i) # ... add the index to the removedIndexes array.
-
+                
         # >>> Remove the unnecessary months.
         removedIndexes.reverse() # Reverse the list.
         for i in removedIndexes: # For every element in removedIndexes ...
@@ -162,7 +162,7 @@ class CsvManagement:
 
 
     # >>> Combine data.
-    def combineData(self):
+    def combineData(self, DELETE_CSV):
 
         # >>> Create the 2D table for all the data.
         self.dataArray = self.create2DArray(len(self.FIELDS), self.recordCount)
@@ -172,7 +172,7 @@ class CsvManagement:
             row = [self.monthArray[i], self.dayArray[i], self.startArray[i], self.endArray[i], self.durationArray[i], self.paidHoursArray[i]] # ... create a row of combined data ...
             self.dataArray[i] = row # ... and add it to the dataArray.
 
-        os.remove(self.CSV_FILE) # Remove the csv file.
+        if DELETE_CSV: os.remove(self.CSV_FILE) # Remove the csv file.
 
 
     # >>> Export all the data.
