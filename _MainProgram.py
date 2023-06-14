@@ -195,7 +195,6 @@ class Main:
                     if self.ORIGINAL_MD5 != NEW_MD5: # If the MD5s are different.
                         os.system("shortcuts run Add\ Shifts\ to\ Calendar &") # Run the shortcut to a add the shifts to the calendar.
                         print("Adding new shifts to calendar.")
-                        #os.system("shortcuts run Add\ Shifts\ to\ Calendar &") # Run the shortcut to a add the shifts to the calendar.
                         print("Exporting paycheque dashboard.")
                 except Exception as e:
                     print("Failed to add shifts to calendar,\nplease do this manually.")
@@ -224,9 +223,7 @@ class Main:
 if __name__ == "__main__":
 
     initMain = Main()
-
     initMain.showDashboard(True) # Show the dashboard at the very start.
-
 
     while initMain.continueProgram: # Loop until we want to exit.
         input("\nPress Enter to continue...") # Wait for user to be ready to continue.

@@ -17,7 +17,7 @@ class MenuOptions:
         self.ifMain = False # Initialise and set to False.
         if __name__ == "__main__": self.ifMain = True # If this is Main, set to True.
 
-        self.payYear, self.payMonth, self.payDay = "", "", ""
+        self.payYear, self.payMonth, self.payDay = ""
 
         self.TWO_DP = Decimal(10) ** -2 # Set the number of decimal places.
         self.clear = lambda: system('clear') # Create this to clear the screen.
@@ -42,8 +42,7 @@ class MenuOptions:
 
     # >>> Get a user input from allowed inputs list.
     def getUserInput(self, validInputs, question, includeQuit):
-        if len(validInputs) == 0:
-            return -1
+        if len(validInputs) == 0: return -1
 
         while True: # Loop until we get a valid user input.
             choice = input('{} '.format(question)).upper().strip() # Get user input, make it upper case.
@@ -95,7 +94,7 @@ class MenuOptions:
             print("%d) %s" % (x+1, tableNames[x])) # print a row.
 
         choice = self.getUserInput(validInputs, "#?", True) # Get user input.
-        if choice == 'quit': return "quit"
+        if choice == 'quit': return choice
 
         tableName = tableNames[int(choice)-1] # Get the corresponding table name.
 
@@ -164,7 +163,6 @@ class MenuOptions:
         today = dt.date.today()
         payChequeDate = dt.date(int(self.payYear), int(self.payMonth), int(self.payDay))
         dayDifference = (payChequeDate - today).days
-#		dayDifference = str(dayDifference) + " day" if dayDifference == 1 else str(dayDifference) + " days" # Add the dynamic days text.
         if doPrint: print("Payment due in:", dayDifference)
 
         if not doPrint: return payChequeValue # Return the pay cheque value.

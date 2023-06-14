@@ -79,13 +79,13 @@ class CsvManagement:
             self.CSV_FILE = input("\nEnter the file path of the CSV file:\nFile path -> ").strip().strip("\"'") # Ask for the csv file path.
             if self.CSV_FILE == ('q' or 'Q'): # If user wants to quit,
                 return True # return True.
-            if ".csv" in self.CSV_FILE: # If the input is the direct file,
-                if exists(self.CSV_FILE): # If file exists, user input is valid,
-                    self.CSV_FILES = [ self.CSV_FILE ] # Add the csv file to the array.
-                    return False # return False.
-            else: # Else if the input is a folder
+            if ".csv" not in self.CSV_FILE: # If the input is a directory,
                 self.CSV_FILES = [ self.CSV_FILE + csv for csv in os.listdir(self.CSV_FILE) if '.csv' in csv ] # Get all the csv files.
                 return False # return False.
+            if exists(self.CSV_FILE): # If file exists, user input is valid,
+                self.CSV_FILES = [ self.CSV_FILE ] # Add the csv file to the array.
+                return False # return False.
+                
             print("\n! >>> ERROR - File does not exist, try again.") # Say the user input is invalid.
 
 
