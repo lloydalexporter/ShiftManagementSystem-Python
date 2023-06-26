@@ -217,7 +217,17 @@ class DatabaseManagement:
         totalHoursWorked = self.getTotalHoursWorked(allTablesData) # Get the total hours worked.
         
         return (totalShiftCount, totalAmountEarned, totalHoursWorked) # Return the statistic data.
+
+
+    def calculateDeductions(self, grossPay):
         
+        NI_MINIMUM = 1048.01 # Current national insurance boundary
+        NI_PERCENT = 1 - 0.12 # Current national insurance percentage
+        
+        if grossPay >= NI_MINIMUM: # If the pay needs to be deducted.
+            return grossPay * NI_PERCENT # return the deducted amount.
+        
+        return grossPay # Else return the value unchanged.
 
 
 

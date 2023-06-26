@@ -65,8 +65,9 @@ class Main:
         previousHourlyPay = self.dM.getHourlyPay(previousMonthTableName)
         currentHourlyPay = self.dM.getHourlyPay(tableName)
         totalHours = previousMonthTotalHours + currentMonthTotalHours
-        totalPay = previousMonthTotalHours * previousHourlyPay + currentMonthTotalHours * currentHourlyPay
-        payChequeValue = self.mO.printPayCheque(tableName, shiftCount, totalHours, totalPay, doPrint) # Print this data.
+        grossPay = previousMonthTotalHours * previousHourlyPay + currentMonthTotalHours * currentHourlyPay
+        netPay = self.dM.calculateDeductions(grossPay)
+        payChequeValue = self.mO.printPayCheque(tableName, shiftCount, totalHours, netPay, doPrint) # Print this data.
         return payChequeValue
 
 

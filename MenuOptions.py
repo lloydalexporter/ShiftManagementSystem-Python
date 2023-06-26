@@ -17,7 +17,7 @@ class MenuOptions:
         self.ifMain = False # Initialise and set to False.
         if __name__ == "__main__": self.ifMain = True # If this is Main, set to True.
 
-        self.payYear, self.payMonth, self.payDay = ""
+        self.payYear, self.payMonth, self.payDay = "", "", ""
 
         self.TWO_DP = Decimal(10) ** -2 # Set the number of decimal places.
         self.clear = lambda: system('clear') # Create this to clear the screen.
