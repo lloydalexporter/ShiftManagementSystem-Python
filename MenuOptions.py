@@ -264,3 +264,11 @@ class MenuOptions:
     # >>> Program quitting screen.
     def quitProgram(self):
         print("\nQuitting the program...")
+
+
+
+# ! - \/ \/ \/ \/ \/ - ! #
+# ! - - -  Main  - - - ! #
+if __name__ == "__main__":
+    
+    print("File is dependent.")

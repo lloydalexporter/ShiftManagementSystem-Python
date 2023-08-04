@@ -204,10 +204,12 @@ class CsvManagement:
 # ! - \/ \/ \/ \/ \/ - ! #
 # ! - - -  Main  - - - ! #
 if __name__ == "__main__":
+    
+    print("File is dependent.")
 
-    initCSV = CsvManagement() # Initiate the Class.
+    # initCSV = CsvManagement() # Initiate the Class.
 
-    initCSV.selectFile() # Select the file.
-    initCSV.getCSVData() # Get the CSV data.
-    initCSV.processCSVData() # Process this data.
-    initCSV.combineData() # Combine all the data.
+    # initCSV.selectFile() # Select the file.
+    # initCSV.getCSVData() # Get the CSV data.
+    # initCSV.processCSVData() # Process this data.
+    # initCSV.combineData() # Combine all the data.

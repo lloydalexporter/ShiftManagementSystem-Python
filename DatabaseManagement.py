@@ -219,6 +219,7 @@ class DatabaseManagement:
         return (totalShiftCount, totalAmountEarned, totalHoursWorked) # Return the statistic data.
 
 
+    # >>> Calculate the deductions and return new value.
     def calculateDeductions(self, grossPay):
         
         NI_MINIMUM = 1048.01 # Current national insurance boundary
@@ -234,9 +235,11 @@ class DatabaseManagement:
 # ! - \/ \/ \/ \/ \/ - ! #
 # ! - - -  Main  - - - ! #
 if __name__ == "__main__":
+    
+    print("File is dependent.")
 
-    initDBM = DatabaseManagement() # Initialise the class.
+    # initDBM = DatabaseManagement() # Initialise the class.
 
-    initDBM.getTableNames()
+    # initDBM.getTableNames()
 
-    initDBM.connection.commit() # Close the database.
+    # initDBM.connection.commit() # Close the database.
