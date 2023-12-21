@@ -90,7 +90,7 @@ class DatabaseManagement:
         year = CURRENT_YEAR # Set the year to current year.
 
         if int(month) < int(CURRENT_MONTH): # If the month is before the current month,
-            print("Is this replacement data? Or for next year?")
+            print(f"Is {month} replacement data? Or for next year?")
             print("1)", year)
             print("2)", int(year) + 1)
             while True: # get the year the user wants.
