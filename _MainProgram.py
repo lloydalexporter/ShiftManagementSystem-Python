@@ -45,7 +45,7 @@ class Main:
         self.mO.workOutPaymentDay(self.CURRENT_YEAR, self.CURRENT_MONTH, self.PAY_DAY) # Update mO class pay dates.
 
         if int(self.CURRENT_DAY) > int(self.mO.payDay): # If the current date is after this months payday, get next month.
-            self.mO.workOutPaymentDay(self.CURRENT_YEAR, str(int(self.CURRENT_MONTH) + 1) if self.CURRENT_MONTH == '12' else '1', self.PAY_DAY) # Add one month if it's past the payday, or set to '1' if current month is December.
+            self.mO.workOutPaymentDay(self.CURRENT_YEAR, str(int(self.CURRENT_MONTH) + 1) if self.CURRENT_MONTH != '12' else '1', self.PAY_DAY) # Add one month if it's past the payday, or set to '1' if current month is December.
 
         tableName = "%s_%02d" % (self.mO.payYear, int(self.mO.payMonth)) # Get the month table name.
         previousMonthTableName = "%s_%02d" % (self.mO.payYear if self.mO.payMonth == '1' else str(int(self.mO.payYear) - 1), int(self.mO.payMonth) - 1 if self.mO.payMonth != '01' else 12 ) # Get the previous month table name.
