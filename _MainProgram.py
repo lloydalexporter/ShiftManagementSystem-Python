@@ -48,8 +48,11 @@ class Main:
             self.mO.workOutPaymentDay(self.CURRENT_YEAR, str(int(self.CURRENT_MONTH) + 1) if self.CURRENT_MONTH != '12' else '1', self.PAY_DAY) # Add one month if it's past the payday, or set to '1' if current month is December.
 
         tableName = "%s_%02d" % (self.mO.payYear, int(self.mO.payMonth)) # Get the month table name.
-        previousMonthTableName = "%s_%02d" % (self.mO.payYear if self.mO.payMonth == '1' else str(int(self.mO.payYear) - 1), int(self.mO.payMonth) - 1 if self.mO.payMonth != '01' else 12 ) # Get the previous month table name.
 
+        tableNames = self.dM.getTableNames() # Get the names of all the tables.
+        previousMonthTableIndex = tableNames.index(tableName) + 1 # Get the index of the previous month.
+        previousMonthTableName = tableNames[previousMonthTableIndex] # Get the previous month table name.
+        
         try:
             payChequeValue = self.calculatePayChequeChoice(previousMonthTableName, tableName, False) # Try get the pay cheque value.
         except:
