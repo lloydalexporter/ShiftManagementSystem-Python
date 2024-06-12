@@ -227,7 +227,10 @@ class Main:
 if __name__ == "__main__":
 
     initMain = Main()
-    initMain.showDashboard(True) # Show the dashboard at the very start.
+    try:
+        initMain.showDashboard(True) # Show the dashboard at the very start.
+    except:
+        print("Could not show dashboard, this may be because of a first run.")
 
     while initMain.continueProgram: # Loop until we want to exit.
         input("\nPress Enter to continue...") # Wait for user to be ready to continue.

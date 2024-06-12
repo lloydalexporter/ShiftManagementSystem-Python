@@ -3,6 +3,7 @@
 
 # ! - Libraries - ! #
 import csv
+import sys
 import hashlib
 import pandas as pd
 import sqlite3 as lite
@@ -18,7 +19,12 @@ class DatabaseManagement:
 
         self.DB_FILE = "_lib/ShiftData.db"
 
-        self.connection = lite.connect(self.DB_FILE) # Connect to the test database file.
+        try:
+            self.connection = lite.connect(self.DB_FILE) # Connect to the test database file.
+        except Exception as e:
+            print(f"Please create a folder in the directory called \"_lib\"")
+            print(e)
+            sys.exit()
 
         self.cursor = self.connection.cursor() # Add the cursor (idek, it just needs to exist).
 
